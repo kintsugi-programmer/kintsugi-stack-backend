@@ -1,1 +1,1087 @@
 # kintsugi-stack-backend
+
+## 1. Roadmap for backend from first principles
+
+![alt text](image.png)
+
+- **Backend engineering overview**
+  - backend engineering is a very wide scope, and it is much more than building a set of CRUD APIs.
+  - the way backend engineering is framed here: it is about building **reliable**, **scalable**, **fault tolerant**, **maintainable** code bases and **efficient systems**.
+  - if someone starts today to learn backend development, there are a lot of resources (at least 1,00 resources), which makes it hard to:
+    - decide what to learn,
+    - prioritize topics,
+    - see the **big picture** of how all the different concepts come together.
+  - this is why it often takes people **years** to get their head around backend concepts and principles:
+    - people primarily start with a **limited scope of training** (college, bootcamp, simple course),
+    - then they **eventually build on top of that** with trial and error and help from other developers over time.
+
+- **Speaker’s background and motivation**
+  - the speaker is a **backend engineer** and has personally faced these struggles:
+    - had to constantly search for resources,
+    - had to learn from other developers,
+    - has read a lot of **books** on backend development,
+    - has studied **hundreds of open‑source codebases** to see how people in the industry actually build systems.
+  - this learning process was **very time‑consuming**.
+  - a second problem in how people start:
+    - people often start backend development from the point of view of a **particular language or framework** (for example: Express, Spring Boot, Ruby on Rails),
+    - then they look at problems only through the **lens of that language and ecosystem**, which creates **blind spots**.
+    - if they need to switch to a different language (for example, from Ruby on Rails to Golang for performance reasons), they may not be able to transfer much of their knowledge if they do not understand the **underlying systems**.
+
+- **Goal of the video Repository**
+  - the speaker has decided to put together a **comprehensive list of sections**.
+  - these sections are based on **foundational concepts** of backend systems.
+  - they are inspired by:
+    - various books read over the years,
+    - open‑source codebases studied.
+  - the Repository will:
+    - start with a **high‑level understanding** of how backend systems work behind the scenes,
+    - then progressively go **deeper** into different backend concepts.
+  - overall aim:
+    - to show how **requests flow**, how **systems communicate**, how core web **protocols** and **practices** work,
+    - to connect all the concepts into one **coherent big picture**.
+
+- **High‑level view of backend systems**
+  - the Repository will begin with:
+    - a high‑level understanding of **how backend systems work behind the scenes**.
+  - it will cover:
+    - how a **request from the browser** flows through different hops:
+      - the network,
+      - firewalls,
+      - over the internet,
+      - and how it is routed to the backend server.
+    - that backend server is situated on a **remote AWS server**.
+    - how the server **responds** to that request.
+    - what the **response looks like**.
+  - this should give a **vivid idea** of:
+    - how systems communicate,
+    - how a **client** communicates with a **server**,
+    - how the **server responds**.
+
+- **HTTP protocol and communication**
+  - from there, the Repository will move to understanding the **HTTP protocol**:
+    - what role HTTP plays,
+    - how communication is established through HTTP.
+  - **HTTP raw messages**
+    - how HTTP raw messages look like.
+  - **HTTP headers**
+    - what HTTP headers are,
+    - what the role of headers is,
+    - different types of headers:
+      - **request headers**,
+      - **representational headers**,
+      - **general headers**,
+      - **security headers**.
+  - **HTTP methods**
+    - different types of HTTP methods:
+      - GET,
+      - POST,
+      - PUT,
+      - DELETE.
+    - when to use each method.
+    - what the **semantics** and **principles** behind each method are.
+  - **CORS (Cross‑Origin Resource Sharing) flow**
+    - what the **CORS flow** is and how it works.
+    - how a **simple request** differs from a **pre‑flight request**.
+    - how a pre‑flight request looks like from:
+      - browser → server,
+      - server → browser.
+  - **HTTP responses and status codes**
+    - structure of HTTP responses.
+    - different **status codes** the server returns.
+    - when to return which type of status code.
+    - what the **most commonly used** HTTP status codes are.
+  - **HTTP caching**
+    - HTTP caching and different caching techniques using HTTP:
+      - eags (ETags),
+      - max‑age headers.
+  - **HTTP versions**
+    - differences between:
+      - HTTP/1.1,
+      - HTTP/2.0,
+      - HTTP/3.0.
+  - **Content negotiation**
+    - how **content negotiation** looks between client and server using different headers.
+  - **Persistent connections**
+    - how **persistent connections** work in HTTP.
+  - **HTTP compression**
+    - HTTP compression and different compression techniques:
+      - gzip,
+      - deflate,
+      - BR (Brotli).
+    - which technique is most commonly used.
+  - **Security: SSL/TLS/HTTPS**
+    - security aspects of HTTP:
+      - SSL,
+      - TLS,
+      - HTTPS.
+
+- **Routing**
+  - the Repository will then move on to **routing**:
+    - how routing maps **URLs** to **server‑side logic**.
+    - what the connection is between **routing** and **HTTP methods**.
+  - **Components of routes**
+    - path parameters,
+    - query parameters.
+  - **Types of routes**
+    - static routes,
+    - dynamic routes,
+    - nested routes,
+    - hierarchical routes,
+    - catch‑all / wildcard routes,
+    - regular expression–based routes.
+  - **API versioning using HTTP**
+    - how to do **API versioning** using HTTP.
+    - different versioning techniques.
+    - what is the **best way to deprecate** an old route.
+    - best practices in the industry.
+  - **Route grouping**
+    - benefits of route grouping:
+      - helps with versioning,
+      - helps with permissions,
+      - helps with shared middleware.
+  - **Securing and optimizing routes**
+    - how to **secure routes**.
+    - how to **optimize route matching performance**.
+
+- **Serialization and deserialization**
+  - next topic: **serialization and deserialization**.
+  - definition:
+    - before sending data over the network, the server **translates the data into a particular format** (serialization),
+    - after receiving data from a client over the internet, the server **translates the data back into its own native format** (deserialization).
+  - **Need and purpose**
+    - why serialization / deserialization is needed.
+    - how it helps with **interoperability** standards between systems.
+  - **Formats**
+    - text‑based formats:
+      - Json (JSON),
+      - XML.
+    - binary formats:
+      - prot off (Protocol Buffers / Protobuf).
+    - performance differences between text‑based and binary formats.
+    - when to use which format.
+  - **Implementation across languages**
+    - how different programming languages implement serialization and deserialization.
+  - **JSON as a popular text‑based format**
+    - JSON structure.
+    - JSON data types:
+      - strings,
+      - numbers,
+      - booleans,
+      - arrays,
+      - objects.
+    - serialization of nested objects and collections in JSON.
+    - deserializing JSON into **native data structures**:
+      - Python dictionary,
+      - Golang structs,
+      - JavaScript object.
+  - **Common JSON issues**
+    - handling missing fields,
+    - handling extra fields,
+    - dealing with null values,
+    - date serialization issues,
+    - time zone issues.
+  - **Custom serialization**
+    - implementing **custom serialization** before sending or serializing data into JSON.
+  - **Error handling in serialization/deserialization**
+    - invalid data,
+    - data conversion errors,
+    - unknown fields.
+  - **Security concerns**
+    - injection attacks,
+    - why validation should be done **before deserialization**,
+    - validating JSON schemas before processing data using **JSON Schema validation**.
+  - **Performance aspects**
+    - reducing serialized data size:
+      - through compression,
+      - eliminating unnecessary fields.
+    - measuring and improving serialization performance:
+      - text‑based vs binary formats (JSON vs protuff),
+      - trade‑off between readability and performance:
+        - text‑based formats are more readable (easier to inspect payload),
+        - binary formats are faster but not easily human‑readable.
+    - when to use a **binary format** vs a **text‑based format** as a valid trade‑off.
+
+- **Authentication and authorization**
+  - next topic: **authentication and authorization**.
+  - **Purpose**
+    - why authentication and authorization are used.
+  - **Types of authentication**
+    - stateful authentication,
+    - stateless authentication,
+    - basic authentication,
+    - bearer token authentication.
+  - **Sessions and tokens**
+    - sessions,
+    - jws (JWTs),
+    - cookies.
+  - **OAuth and OpenID Connect**
+    - deep dive on:
+      - oo protocol (OAuth),
+      - OpenID Connect.
+  - **API keys and MFA**
+    - how API keys work,
+    - how multi‑factor authentication works.
+  - **Salting, hashing, cryptography**
+    - what salting and hashing are,
+    - different cryptographic techniques used in authorization.
+  - **Authorization models**
+    - aack,
+    - rback (role‑based access control),
+    - reback (relationship‑based access control).
+  - **Security best practices**
+    - securing cookies,
+    - avoiding:
+      - CSRF,
+      - XSS,
+      - MITM (man‑in‑the‑middle attacks).
+    - audit logging:
+      - recording authentication and authorization events for audits and monitoring.
+    - monitoring:
+      - failed login attempts,
+      - privilege escalation,
+      - access to sensitive resources.
+  - **Error messages and information leakage**
+    - obfuscating authentication‑related error messages,
+    - preventing information leakage to attackers through overly detailed error messages.
+    - handling edge cases:
+      - keeping **consistency in responses** across different failure modes (for example, rate limiting, account lockout).
+  - **Timing attacks**
+    - avoiding timing attacks:
+      - attackers can exploit small time differences in error responses to infer valid credentials.
+      - example:
+        - an error for a wrong password might take longer than an error for an invalid username,
+        - because password checks involve hashing or cryptographic operations.
+      - even though exploiting this is difficult, systems should not leave **security holes**.
+
+- **Validation and transformation**
+  - next topic: **validation and transformation**.
+  - **Types of validation**
+    - syntactic validation:
+      - checking if a string is a valid email,
+      - checking if a string is a valid phone number,
+      - checking if a string is a valid date format.
+    - semantic validation:
+      - a date of birth cannot be in the future,
+      - the age of a person should be between 1 and 120.
+    - type validation:
+      - checking if input values match expected types:
+        - is it a string?
+        - an integer?
+        - an array?
+        - an object?
+  - **Client‑side vs server‑side validation**
+    - client‑side validation:
+      - improves user experience by providing instant feedback.
+    - server‑side validation:
+      - is the true **security** implementation,
+      - it is the **gateway to your business logic**,
+      - must exist even if client‑side validation is already implemented.
+  - **Failing fast**
+    - importance of **failing fast**:
+      - reduce unnecessary processing,
+      - return early when validation fails.
+  - **Consistency between front end and backend**
+    - importance of keeping **validation logic consistent** between:
+      - frontend validation,
+      - backend validation.
+  - **Transformations**
+    - type casting:
+      - converting string to number, number to string.
+      - example:
+        - query parameters or path parameters are received as strings,
+        - but you might expect an ID field as a number,
+        - before sending to handlers, you must convert it from string to number.
+      - this step is called a **transformation** and is part of the validation pipeline.
+    - different date formats:
+      - frontend might send a different date format,
+      - backend might expect a timestamp,
+      - conversion has to be handled in the validation pipeline.
+  - **Normalization**
+    - converting email to lower case,
+    - trimming whitespace from a string,
+    - adding country code to a phone number.
+  - **Sanitization**
+    - for security issues:
+      - sanitizing user‑submitted strings to prevent attacks such as SQL injection.
+  - **Complex validation logic**
+    - relationship‑based validation:
+      - example:
+        - a form has fields: password, confirm password,
+        - system must check whether the two strings are the same.
+    - conditional validation:
+      - example:
+        - form has fields: partner name, married (boolean true/false),
+        - partner field is required **only if** married is true.
+    - chained validation:
+      - a sequence like:
+        - converting a string to lower case,
+        - removing special characters,
+        - checking length.
+  - **Error handling in validation**
+    - sending **meaningful error messages** to the frontend so the user can fix issues.
+    - aggregating **all validation errors in one response** for client‑side display.
+    - obfuscating error messages:
+      - instead of “invalid password”, use “invalid credentials” to prevent certain attacks.
+  - **Handling failed transformations**
+    - gracefully handling:
+      - invalid JSON,
+      - failed date conversion,
+    - and letting the user know with a **meaningful message**.
+  - **Performance trade‑offs in validation**
+    - understanding performance cost of validation,
+    - optimizing by returning early,
+    - avoiding redundant validations.
+
+- **Middleware**
+  - next topic: **middleware**.
+  - **Definition and when to use**
+    - what middleware is,
+    - when to use middleware,
+    - common use cases of middleware.
+  - **Role in request cycle**
+    - pre‑request middleware,
+    - post‑response middleware.
+  - **Flow and chaining**
+    - how middleware flows:
+      - middleware executed in sequence,
+      - passing control to the next middleware until the request reaches its final handler.
+    - how to **order middleware** appropriately:
+      - log the request,
+      - check whether user is authenticated,
+      - perform validation,
+      - handle the route,
+      - perform error handling.
+    - this order **matters**.
+  - **Next function and exits**
+    - how the `next` function works in middleware.
+    - exiting middleware early:
+      - middleware can **short‑circuit** the request pipeline,
+      - for example by handling 404 errors directly.
+  - **Common middlewares**
+    - security middlewares:
+      - add security headers:
+        - X‑Content‑Type,
+        - Strict‑Transport‑Security,
+        - Content‑Security‑Policy.
+      - add appropriate CORS headers to every request / response.
+      - avoid CSRF.
+      - rate limiting.
+    - authentication middleware:
+      - reusable logic for protecting routes across the app.
+    - logging and monitoring middlewares:
+      - request logging,
+      - structured logging for observability and easier debugging in production.
+    - error handling middleware:
+      - catches and formats application‑level errors,
+      - ensures **consistent API responses**.
+    - compression / performance middlewares:
+      - compress response bodies,
+      - reduce size of data sent over the network.
+    - data parsing middleware:
+      - parsing incoming request bodies:
+        - JSON,
+        - URL‑encoded forms,
+        - file uploads.
+      - handling multipart data for file uploads.
+  - **Performance and scalability of middleware**
+    - best practices:
+      - keep middleware **lightweight and efficient**,
+      - ensure middleware is applied in the correct order,
+      - understand how middleware order affects:
+        - performance,
+        - security of the application.
+
+- **Request context**
+  - next topic: **request context**.
+  - **Definition**
+    - request context is the **metadata** that is passed through:
+      - application middlewares,
+      - controllers,
+      - services.
+    - it is a **request‑scoped state**:
+      - state is only valid for that single request.
+  - **Lifecycle and state**
+    - life cycle of a request:
+      - maintaining state for the **duration** of a request,
+      - sharing data across different layers without tight coupling.
+    - context provides **temporary request‑scoped state**.
+  - **Components of request context**
+    - request metadata:
+      - HTTP method,
+      - URL,
+      - headers,
+      - query parameters,
+      - body.
+    - session and user information:
+      - authentication middleware fetches user info,
+      - user information is added to the request context,
+      - for that request, user info is injected into context.
+    - tracking and logging information:
+      - unique request IDs,
+      - trace IDs.
+    - request‑specific data:
+      - custom data injected during the request lifecycle, such as:
+        - caching data,
+        - permission checks.
+  - **Use cases**
+    - authentication,
+    - rate limiting,
+    - tracing,
+    - logging.
+  - **Middleware and context**
+    - explore how middlewares interact with request context.
+  - **Timeouts and cancellation**
+    - different types of timeouts:
+      - request timeouts,
+      - custom timeouts,
+      - cancellation signals.
+  - **Best practices**
+    - keep context **lightweight** to prevent memory overhead,
+    - ensure context data is **cleaned up** after the request lifecycle to prevent memory leaks,
+    - avoid tightly coupling components through context,
+    - avoid over‑relying on context for passing data.
+
+- **Handlers and controllers**
+  - next topic: **handlers and controllers**.
+  - **MVC pattern**
+    - connection to the MVC pattern:
+      - what handlers are,
+      - what controllers are,
+      - what services are,
+      - responsibilities of each.
+  - **Reducing code with middleware**
+    - using middleware to reduce repeated code in handlers/controllers.
+  - **Centralized error handling**
+    - centralized error handling in handlers.
+    - consistent success and error message formats,
+    - how to implement these formats in controllers.
+
+- **CRUD operations and RESTful APIs**
+  - **CRUD mapping to HTTP**
+    - how CRUD operations map to HTTP methods.
+    - common APIs associated with each method:
+      - POST:
+        - used for creation and submissions,
+        - common status codes:
+          - 201 Created,
+          - 400 Bad Request if something is wrong with the input.
+      - GET:
+        - fetching a list of resources,
+        - fetching a single resource.
+      - PUT and PATCH:
+        - updating resources.
+      - DELETE:
+        - deleting resources.
+  - **Pagination, search, sorting, filtering**
+    - implementing pagination,
+    - implementing a search API,
+    - implementing sorting,
+    - implementing filtering.
+  - **Best practices for CRUD and APIs**
+    - strict validation,
+    - consistent response formatting,
+    - limiting payload size,
+    - redacting sensitive fields,
+    - proper error handling,
+    - authentication and authorization.
+  - **RESTful architecture**
+    - what RESTful architecture is.
+    - best practices for implementing REST APIs:
+      - designing APIs around **resources**,
+      - sticking to **HTTP semantics**.
+    - best practices for:
+      - filtering,
+      - pagination.
+  - **API versioning**
+    - different types of versioning:
+      - URI versioning,
+      - header versioning,
+      - query string versioning,
+      - media type versioning.
+  - **OpenAPI‑oriented design**
+    - designing APIs with **OpenAPI spec** in mind.
+    - content negotiation,
+    - capturing exceptions and providing meaningful messages,
+    - supporting client‑side caching:
+      - e taxs (ETags),
+    - optimizing large requests and responses.
+
+- **Databases**
+  - next topic: **databases**.
+  - **Relational vs non‑relational**
+    - relational databases vs non‑relational databases,
+    - differences,
+    - when to use which.
+  - **Theoretical concepts**
+    - ACID,
+    - CAP theorem.
+  - **Basic querying**
+    - basic querying,
+    - joins.
+  - **Database design best practices**
+    - schema design,
+    - indexing.
+  - **Optimization**
+    - query optimization,
+    - caching,
+    - connection pooling.
+  - **Data integrity**
+    - constraints,
+    - validations,
+    - transactions,
+    - concurrency.
+  - **ORMs**
+    - how ORMs work,
+    - whether to use an ORM,
+    - trade‑offs of ORMs.
+  - **Migrations**
+    - what database migrations are.
+
+- **Business Logic Layer (BLL)**
+  - next topic: **business logic layer (BL / BLL)**.
+  - **Role**
+    - what the role of the business logic layer is.
+  - **Layers of a request**
+    - different layers of a request cycle:
+      - validation layer,
+      - routing,
+      - middlewares,
+      - handlers and controllers.
+    - these all fall under the **presentation layer** because they deal with user data:
+      - accepting user data,
+      - returning user data.
+    - after that, the **business logic layer** is the middle layer:
+      - it deals with the **core business logic**.
+    - after that, the **data access layer**:
+      - deals with databases,
+      - performs queries, inserts, deletions.
+      - business logic layer uses the data access layer behind the scenes.
+  - **Design principles**
+    - separation of concerns,
+    - single responsibility,
+    - open/closed principle,
+    - dependency inversion.
+  - **Components of BLL**
+    - services,
+    - domain models:
+      - represent core entities like user, order, etc.,
+    - business rules,
+    - business validation logic.
+  - **Service layer best practices**
+    - best practices for designing service layers,
+    - how to handle errors properly,
+    - how to propagate errors from service layer to presentation layer.
+
+- **Caching**
+  - next topic: **caching**.
+  - **Need for caching**
+    - what the need for caching is,
+    - how caching differs from database persistence.
+  - **Types of caching**
+    - memory caching,
+    - browser caching,
+    - database caching.
+    - client‑side caching,
+    - server‑side caching.
+  - **Caching strategies**
+    - cache‑aside,
+    - write‑through,
+    - write‑behind,
+    - write‑back,
+    - read‑through.
+  - **Eviction strategies**
+    - LRU (least recently used),
+    - LFU (least frequently used),
+    - TTL (time‑to‑live),
+    - FIFO.
+  - **Cache invalidation**
+    - need for cache invalidation:
+      - manual invalidation,
+      - TTL‑based invalidation,
+      - event‑based invalidation.
+  - **Cache levels**
+    - level 1: in‑memory cache,
+    - level 2: network‑distributed cache,
+    - hierarchical caching:
+      - combines level 1 and level 2,
+      - frequently used data stored in fast, small cache (L1),
+      - less frequently used data stored in slower, large cache (L2).
+  - **Caching for web apps**
+    - caching static assets,
+    - caching API responses using headers.
+  - **Caching with databases**
+    - query caching:
+      - storing results of heavy joins in Redis.
+    - cache hit and cache miss ratio,
+    - how to optimize these ratios.
+
+- **Transactional emails**
+  - next topic: **transactional emails**.
+  - **Use cases**
+    - what transactional emails are used for,
+    - common use cases.
+  - **Anatomy of a transactional email**
+    - subject,
+    - preheader,
+    - body header,
+    - main content,
+    - CTA (call to action),
+    - footer.
+  - **Personalization**
+    - how to personalize emails with different **dynamic parameters**.
+
+- **Task queuing and scheduling**
+  - next topic: **task queuing and scheduling**.
+  - **Common use cases for queuing**
+    - sending emails,
+    - processing image files,
+    - third‑party API integration such as:
+      - payment processing,
+      - webhooks.
+    - offloading heavy computation like batch processing:
+      - example:
+        - user clicks a button “clear all my data”,
+        - to clear all user data, you must execute multiple queries on different tables,
+        - that might take time,
+        - instead of blocking the request:
+          - return a response instantly,
+          - trigger a background job by pushing into a task queue.
+  - **Use cases for scheduling**
+    - running database backups,
+    - recurring notifications and reminders,
+    - data synchronization,
+    - maintenance tasks:
+      - clearing logs,
+      - clearing caches.
+  - **Components of a task queue**
+    - producer,
+    - queue,
+    - consumer,
+    - broker,
+    - backend.
+  - **Task flow**
+    - flow of a task through producer → queue → consumer → backend.
+  - **Task dependencies**
+    - chain dependency,
+    - parent‑child relationship between tasks.
+  - **Task groups**
+    - executing multiple tasks concurrently,
+    - waiting for all of them to complete together.
+  - **Error handling and retries**
+    - how to handle errors in task queues,
+    - how to implement retries.
+  - **Task prioritization and rate limiting**
+    - prioritizing tasks:
+      - for example, processing payment tasks before notification tasks.
+    - rate limiting tasks.
+
+- **Elasticsearch**
+  - next topic: **Elasticsearch**.
+  - **Why use Elasticsearch**
+    - why we use Elasticsearch,
+    - how it works behind the scenes.
+  - **Core techniques**
+    - inverted index,
+    - term frequency,
+    - inverse document frequency,
+    - segments and shards.
+  - **Use cases**
+    - type‑ahead experience,
+    - log analytics,
+    - social media search:
+      - full‑text search for:
+        - user profiles,
+        - posts,
+        - comments.
+  - **Indexes**
+    - how to create and manage indexes.
+  - **Searching and querying**
+    - basic searching,
+    - full‑text search,
+    - relevance scoring.
+  - **Search performance optimization**
+    - text vs keyword fields,
+    - understanding analyzers,
+    - boosting,
+    - pagination.
+  - **Advanced search patterns**
+    - filtering,
+    - aggregation,
+    - fuzzy search.
+  - **Kibana**
+    - how Kibana works,
+    - how to use Elasticsearch in a user‑friendly way.
+  - **Best practices**
+    - defining field mappings explicitly,
+    - optimizing the number of shards,
+    - indexing data in batches,
+    - avoiding wildcards.
+
+- **Error handling**
+  - next topic: **error handling**.
+  - **Types of errors**
+    - syntax errors,
+    - runtime errors,
+    - logical errors.
+  - **Error handling strategies**
+    - fail‑safe,
+    - fail‑fast,
+    - graceful degradation,
+    - prevention of errors.
+  - **Best practices**
+    - catching errors early,
+    - not swallowing errors,
+    - creating custom error types,
+    - failing gracefully,
+    - logging errors,
+    - using stack traces.
+  - **Global error handlers**
+    - how global error handlers work.
+  - **User‑facing errors**
+    - handling user‑facing errors appropriately:
+      - friendly error messages,
+      - actionable feedback.
+  - **Monitoring and logging**
+    - importance of monitoring and logging in error handling.
+    - tools:
+      - Sentry,
+      - ELK stack.
+    - error alerts:
+      - email‑based alerts,
+      - Slack‑based alerts.
+
+- **Configuration management**
+  - next topic: **config management**.
+  - **Definition and purpose**
+    - what config management is,
+    - how it helps with flexibility,
+    - how it decouples environment‑specific settings from application logic.
+  - **Use cases**
+    - managing different environments via config management,
+    - safely managing sensitive data:
+      - API keys,
+      - database passwords,
+      - private certificates.
+    - dynamically enabling/disabling features without changing the codebase.
+  - **Best practices**
+    - general best practices for config management.
+  - **Types of configs**
+    - static configs:
+      - DB credentials,
+      - API endpoints.
+    - dynamic configs:
+      - feature flags,
+      - rate limits.
+    - sensitive configs:
+      - credentials,
+      - tokens,
+      - secrets.
+  - **Sources of configs**
+    - env file,
+    - JSON,
+    - YAML.
+    - differences between:
+      - environment variables,
+      - command‑line flags,
+      - static files.
+
+- **Logging, monitoring, and observability**
+  - next topic: **logging, monitoring, and observability**.
+  - **Differences**
+    - differences between:
+      - logging,
+      - tracing,
+      - monitoring,
+      - observability.
+  - **Types of logging**
+    - system logging,
+    - application logging,
+    - access logs,
+    - security logs.
+  - **Log levels**
+    - debug,
+    - info,
+    - warn,
+    - error,
+    - fatal.
+  - **Structured vs unstructured**
+    - structured logging vs unstructured logging.
+  - **Logging best practices**
+    - centralized logging,
+    - log rotation and retention,
+    - contextual and meaningful logs,
+    - avoiding sensitive data in logs:
+      - passwords,
+      - API keys.
+  - **Monitoring**
+    - types of monitoring:
+      - infrastructure monitoring,
+      - application performance monitoring,
+      - uptime monitoring.
+    - tools used:
+      - Prometheus,
+      - Grafana.
+    - managing alerts and notifications:
+      - defining thresholds,
+      - creating alerts,
+      - avoiding **alert fatigue** by:
+        - creating only actionable alerts,
+        - ensuring alerts are meaningful and necessary.
+  - **Observability**
+    - three pillars of observability:
+      - logs,
+      - metrics,
+      - traces.
+    - best practices around observability.
+    - security and compliance of log management.
+
+- **Graceful shutdown**
+  - next topic: **graceful shutdown**.
+  - **Why we need graceful shutdown**
+    - why graceful shutdown is needed,
+    - how it works behind the scenes.
+  - **Use cases**
+    - server restarts,
+    - scaling in cloud environments,
+    - microservices,
+    - long‑running jobs.
+  - **How it works**
+    - signal handling:
+      - sigor,
+      - signant,
+      - sill signals.
+    - steps of graceful shutdown:
+      - capturing a signal,
+      - stopping acceptance of new requests,
+      - completing in‑flight requests,
+      - closing external resources:
+        - database connections,
+        - any open files, etc.,
+      - terminating the app at the end.
+
+- **Security**
+  - next topic: **security**.
+  - **Backend security aspects**
+    - different aspects of security in a backend codebase:
+      - avoiding:
+        - SQL injection,
+        - NoSQL injection,
+        - XSS,
+        - CSRF,
+        - broken authentication,
+        - insecure deserialization.
+  - **Principles of secure software design**
+    - least privilege,
+    - defense in depth,
+    - fail‑secure defaults,
+    - separation of duties,
+    - security by design.
+  - **Validation and protection**
+    - importance of input validation and sanitization,
+    - rate limits,
+    - Content‑Security‑Policy,
+    - CORS,
+    - SameSite cookie,
+    - importance of monitoring events.
+
+- **Scaling and performance**
+  - next topic: **scaling and performance**.
+  - **Performance metrics**
+    - response time,
+    - resource utilization.
+  - **Identifying bottlenecks**
+    - identifying bottlenecks in the system.
+  - **Caching and database optimization**
+    - avoiding N+1 query problems,
+    - ensuring proper use of joins,
+    - using lazy loading where appropriate.
+  - **Indexes and batching**
+    - using database indexes to speed up reads on frequently queried fields:
+      - indexing foreign keys,
+      - indexing search fields.
+    - processing data in batches:
+      - to minimize database load,
+      - to improve performance for large data sets.
+  - **Memory and network optimization**
+    - avoiding memory leaks:
+      - closing file handles,
+      - closing database connections,
+      - cleaning up after long processes.
+    - minimizing network overhead:
+      - reducing payload size,
+      - using compression.
+  - **Performance testing and profiling**
+    - how to do performance testing,
+    - how to profile applications.
+  - **Best practices for performant code**
+    - focus on writing **clear and maintainable code first**,
+    - avoid premature optimization,
+    - write modular code:
+      - easier to optimize individual components without affecting entire system.
+    - make sure that if some resources are under load or unavailable:
+      - system **degrades gracefully** instead of crashing.
+    - offload non‑critical tasks to background processes or task queues:
+      - sending emails,
+      - logging,
+      - etc.,
+      - to free resources for critical operations.
+
+- **Concurrency and parallelism**
+  - next topic: **concurrency and parallelism**.
+  - **Differences**
+    - difference between concurrency and parallelism.
+    - how concurrency helps in **IO‑bound** tasks.
+    - how parallelism helps in **CPU‑bound** tasks.
+
+- **Object storage and large files**
+  - next topic: **object storage and large files**.
+  - **Use cases**
+    - common use cases of object storage:
+      - e.g., AWS S3.
+  - **Large file handling**
+    - managing large files:
+      - chunking,
+      - streaming,
+      - multi‑part file uploads.
+
+- **Realtime backend systems**
+  - next topic: **realtime backend systems**.
+  - **Technologies**
+    - WebSockets,
+    - Server‑Sent Events (SSE),
+    - pub/sub architecture.
+
+- **Testing and code quality**
+  - next topic: **testing and code quality**.
+  - **Types of testing**
+    - unit testing,
+    - integration testing,
+    - end‑to‑end testing,
+    - functional testing,
+    - regression testing,
+    - performance testing,
+    - load and stress testing,
+    - user acceptance testing,
+    - security testing.
+  - **TDD and automation**
+    - what test‑driven development (TDD) is,
+    - how to automate tests in CI/CD environments.
+  - **Code quality tools**
+    - managing code quality with:
+      - external linting tools,
+      - formatting tools.
+  - **Quality and coverage metrics**
+    - code quality and coverage measures:
+      - cyclomatic complexity:
+        - measures complexity of a function by counting the number of possible paths through the code,
+      - maintainability index:
+        - quantifies how easy it is to maintain a codebase based on:
+          - complexity,
+          - lines of code,
+          - other factors.
+
+- **12‑Factor App**
+  - next topic: a set of principles known as the **12‑Factor App**.
+  - this will be covered as a **very interesting** set of principles for backend applications.
+
+- **OpenAPI standards**
+  - next topic: **OpenAPI standards**.
+  - **Need and benefits**
+    - what the need for these standards is,
+    - why we should stick to them,
+    - benefits and use cases:
+      - documentation,
+      - automation,
+      - ecosystem surrounding it:
+        - Swagger,
+        - Corden,
+        - postmen (Postman).
+  - **History**
+    - Swagger to OpenAPI transition,
+    - different versions that are currently active.
+  - **Key concepts in OpenAPI documents**
+    - API paths,
+    - request and response definition,
+    - parameters,
+    - schemas.
+  - **Structure of an OpenAPI document**
+    - metadata,
+    - paths,
+    - components,
+    - security definitions,
+    - responses.
+  - **New features**
+    - new features of:
+      - OpenAPI 3.0,
+      - OpenAPI 3.1.
+  - **Tools**
+    - tools surrounding OpenAPI:
+      - Swagger UI,
+      - Cen,
+      - Postman.
+  - **Best practices**
+    - avoiding duplication,
+    - sticking to standards.
+  - **API‑First development**
+    - API‑First development method:
+      - define or write your OpenAPI spec **first**,
+      - then start creating the APIs.
+
+- **Webhooks**
+  - next topic: **webhooks**.
+  - **Use cases**
+    - sending notifications,
+    - third‑party integrations.
+  - **APIs vs webhooks**
+    - difference between API vs webhook for the same use case:
+      - API:
+        - often uses polling,
+        - client‑side initiated.
+      - webhooks:
+        - push‑based,
+        - server‑initiated.
+  - **Key components of webhooks**
+    - webhook URL,
+    - event triggers,
+    - payload,
+    - HTTP method,
+    - response handling.
+  - **Best practices for webhooks**
+    - webhook signature verification,
+    - using HTTPS,
+    - quick response,
+    - retry logic,
+    - logging.
+  - **Testing webhooks**
+    - how to test webhooks with enro (e.g., tunneling service).
+  - **Real‑world use cases**
+    - payment processing (STP),
+    - GitHub webhooks,
+    - Slack,
+    - Discord,
+    - TWU, etc.
+
+- **DevOps concepts for backend engineers**
+  - final topic: **DevOps concepts** a backend engineer should be familiar with.
+  - **Core concepts**
+    - continuous integration (CI),
+    - continuous delivery (CD),
+    - continuous deployment.
+  - **DevOps practices**
+    - infrastructure as code (IaC),
+    - config management,
+    - version control.
+  - **DevOps tools**
+    - creating containers with Docker,
+    - orchestrating containers with Kubernetes,
+    - CI/CD pipelines.
+  - **Scaling services**
+    - how to scale your service:
+      - horizontal scaling,
+      - vertical scaling.
+  - **Deployment strategies**
+    - red/green deployment,
+    - rolling deployment,
+    - etc.
+  - **Repository scope**
+    - all of these concepts will be covered in the **next 30 or 40 sections** in this Repository.
