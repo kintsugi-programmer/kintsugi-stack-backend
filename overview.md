@@ -35,6 +35,7 @@ keywords:
 </div>
 
 ## Introduction to Backend Engineering
+
 *   **Definition**: Backend engineering extends beyond building CRUD APIs. It involves building codebases and systems that are:
     *   **Reliable**
     *   **Scalable**
@@ -51,6 +52,7 @@ keywords:
     *   **Transferability issues**: Knowledge is hard to transfer if underlying systems are not understood (e.g., migrating from Ruby on Rails to Golang for performance).
 
 ## High-Level System Architecture
+
 *   **Request Flow**:
     1.  Request originates from a browser.
     2.  Travels through network hops and firewalls over the internet.
@@ -68,6 +70,7 @@ flowchart LR
 ```
 
 ## HTTP Protocol
+
 *   **Communication**: How connection is established.
 *   **Raw Messages**: Understanding the structure.
 *   **HTTP Headers**:
@@ -91,6 +94,7 @@ sequenceDiagram
     Browser->>Server: Actual Request
     Server-->>Browser: Response
 ```
+
 *   **HTTP Responses**:
     *   Structure.
     *   **Status Codes**: When to return which code; common codes.
@@ -108,6 +112,7 @@ sequenceDiagram
     *   HTTPS.
 
 ## Routing
+
 *   **Definition**: Mapping URLs to server-side logic.
 *   **Components**:
     *   Path parameters.
@@ -129,6 +134,7 @@ sequenceDiagram
 *   **Optimization**: Secure routes and route matching performance.
 
 ## Serialization and Deserialization
+
 *   **Definitions**:
     *   **Serialization**: Translating native data to a network format before sending.
     *   **Deserialization**: Translating received network data back to native format.
@@ -161,6 +167,7 @@ sequenceDiagram
     *   Trade-offs between readability (text) and speed (binary).
 
 ## Authentication and Authorization
+
 *   **Concepts**: Why they are used.
 *   **Types of Authentication**:
     *   Stateful vs. Stateless.
@@ -191,6 +198,7 @@ sequenceDiagram
     *   **Timing Attacks**: Preventing attackers from inferring credentials based on response time differences (e.g., password hashing time vs. username lookup time).
 
 ## Validation and Transformation
+
 *   **Types of Validation**:
     *   **Syntactic**: Format checks (Email, valid phone number, date format).
     *   **Semantic**: Logical checks (Date of birth not in future, age between 1-120).
@@ -206,6 +214,7 @@ flowchart LR
     Lowercase --> RemoveChars[Remove special chars]
     RemoveChars --> CheckLength[Check length]
 ```
+
 *   **Client vs. Server Side**:
     *   **Client**: Improves UX (instant feedback).
     *   **Server**: True security gateway (essential for business logic protection).
@@ -228,6 +237,7 @@ flowchart LR
 *   **Performance**: Optimize by returning early and avoiding redundant validations.
 
 ## Middleware
+
 *   **Definition**: Code executing in the request cycle.
 *   **Role**: Pre-request processing or Post-response processing.
 *   **Flow**:
@@ -245,6 +255,7 @@ flowchart LR
     Route --> Response[Response]
     Validation -.-> ErrorHandling[Error Handling]
 ```
+
 *   **Ordering Importance**:
     1.  Logging.
     2.  Authentication.
@@ -263,6 +274,7 @@ flowchart LR
 *   **Scalability**: Keep lightweight and efficient.
 
 ## Request Context
+
 *   **Definition**: Metadata and request-scoped state passed through layers (middleware, controllers, services).
 *   **Lifecycle**: Valid only for the duration of the request.
 *   **Purpose**: Sharing data without coupling.
@@ -282,6 +294,7 @@ flowchart LR
     *   Avoid tight coupling or over-reliance.
 
 ## Handlers and Controllers
+
 *   **Architecture**: MVC Pattern (Handlers, Controllers, Services).
 *   **Responsibilities**:
     *   Centralized error handling.
@@ -302,6 +315,7 @@ flowchart LR
     *   Redacting sensitive fields.
 
 ## RESTful Architecture
+
 *   **Principles**: Designing APIs around resources and HTTP semantics.
 *   **Versioning Types**:
     *   URI versioning.
@@ -316,6 +330,7 @@ flowchart LR
     *   Optimizing large requests/responses.
 
 ## Databases
+
 *   **Types**: Relational vs. Non-relational (Differences and use cases).
 *   **Theoretical Concepts**:
     *   ACID properties.
@@ -335,6 +350,7 @@ flowchart LR
     *   **Migrations**: Managing schema changes.
 
 ## Business Logic Layer (BLL)
+
 *   **Role**: The core layer between Presentation (handlers/routes) and Data Access (database).
 *   **Design Principles**:
     *   Separation of concerns.
@@ -351,6 +367,7 @@ flowchart LR
     *   Proper error handling and propagation to presentation layer.
 
 ## Caching
+
 *   **Purpose**: Difference from database persistence.
 *   **Types**:
     *   Memory caching.
@@ -381,12 +398,14 @@ flowchart LR
     *   Metrics: Optimizing Cache Hit vs. Cache Miss ratio.
 
 ## Transactional Emails
+
 *   **Use Cases**: Common scenarios.
 *   **Anatomy**:
     *   Subject, Pre-header, Body header, Main content, CTA (Call to Action), Footer.
 *   **Personalization**: Dynamic parameters.
 
 ## Task Queuing and Scheduling
+
 *   **Task Queuing Use Cases**:
     *   Sending emails.
     *   Processing image files.
@@ -408,6 +427,7 @@ flowchart LR
     Broker --> Consumer[Consumer]
     Consumer --> Backend[Backend]
 ```
+
 *   **Flow & Features**:
     *   **Dependencies**: Chain dependency, Parent-Child relationships.
     *   **Task Groups**: Concurrent execution (waiting for all to complete).
@@ -415,6 +435,7 @@ flowchart LR
     *   **Control**: Task prioritization (Payment > Notification), Rate limiting.
 
 ## ElasticSearch
+
 *   **Mechanisms**:
     *   Inverted index.
     *   Term frequency & Inverse document frequency.
@@ -438,6 +459,7 @@ flowchart LR
     *   Avoiding wildcards.
 
 ## Error Handling
+
 *   **Types of Errors**: Syntax, Runtime, Logical.
 *   **Strategies**:
     *   Fail-safe vs. Fail-fast.
@@ -455,6 +477,7 @@ flowchart LR
     *   Alerts: Email, Slack.
 
 ## Config Management
+
 *   **Definition**: Decoupling environment-specific settings from logic.
 *   **Use Cases**:
     *   Different environments.
@@ -468,6 +491,7 @@ flowchart LR
 *   **Comparison**: Environment variables vs. Command line flags vs. Static files.
 
 ## Logging, Monitoring, and Observability
+
 *   **Logging**:
     *   Types: System, Application, Access, Security.
     *   Levels: `Debug`, `Info`, `Warn`, `Error`, `Fatal`.
@@ -482,6 +506,7 @@ flowchart LR
     *   Security and compliance of log management.
 
 ## Graceful Shutdown
+
 *   **Need**: Server restarts, Cloud scaling, Microservices, Long-running jobs.
 *   **Mechanism**:
     *   Signal handling: `SIGTERM`, `SIGINT`, `SIGKILL`.
@@ -493,6 +518,7 @@ flowchart LR
     5.  Terminate app.
 
 ## Security
+
 *   **Attack Prevention**:
     *   SQL Injection, NoSQL Injection.
     *   XSS (Cross-Site Scripting).
@@ -515,6 +541,7 @@ flowchart LR
     *   Monitoring events.
 
 ## Scaling and Performance
+
 *   **Metrics**: Response time, Resource utilization.
 *   **Bottlenecks**: Identifying issues.
 *   **Database Optimization**:
@@ -534,11 +561,13 @@ flowchart LR
     *   **Offloading**: Move non-critical tasks (Email, Logging) to background queues.
 
 ## Concurrency and Parallelism
+
 *   **Differences**:
     *   **Concurrency**: Helps in I/O bound tasks.
     *   **Parallelism**: Helps in CPU bound tasks.
 
 ## Object Storage and Large Files
+
 *   **Object Storage**: AWS S3 usage.
 *   **Large File Management**:
     *   Chunking.
@@ -546,12 +575,14 @@ flowchart LR
     *   Multipart file uploads.
 
 ## Real-time Backend Systems
+
 *   **Technologies**:
     *   WebSockets.
     *   Server-Sent Events (SSE).
 *   **Architecture**: Pub/Sub.
 
 ## Testing and Code Quality
+
 *   **Types of Testing**:
     *   Unit, Integration, End-to-End (E2E).
     *   Functional, Regression.
@@ -565,10 +596,12 @@ flowchart LR
     *   **Cyclomatic Complexity**: Measures complexity by counting possible paths.
     *   **Maintainability Index**: Quantifies ease of maintenance based on complexity/lines of code.
 
-## 12 Factor App
+## Factor App
+
 *   Set of principles for building software-as-a-service apps.
 
 ## OpenAPI Standards
+
 *   **Benefits**:
     *   Standardization.
     *   Documentation Automation.
@@ -584,6 +617,7 @@ flowchart LR
 *   **API First Development**: Defining spec first, then creating APIs.
 
 ## Webhooks
+
 *   **Use Cases**: Notifications, Third-party integrations.
 *   **Comparison**:
     *   **API**: Polling (Client-initiated).
@@ -604,6 +638,7 @@ flowchart LR
 *   **Examples**: Stripe Payment Processing, GitHub, Slack, Discord, Twilio.
 
 ## DevOps Concepts
+
 *   **Core Concepts**:
     *   Continuous Integration (CI).
     *   Continuous Delivery (CD).
