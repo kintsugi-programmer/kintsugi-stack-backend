@@ -1,6 +1,6 @@
 # kintsugi-stack-backend
 
-![alt text](images/image.webp)
+![alt text](image.webp)
 
 > **Coding Is Meditation** is a living artifact of continuous research and disciplined engineering thought.  
 
