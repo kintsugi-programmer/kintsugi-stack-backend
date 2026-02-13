@@ -647,8 +647,8 @@ flowchart TD
     AD --> AE["Webhooks"]
     AE --> AF["DevOps Concepts"]
 
-    classDef level1 fill:#6a4c93,stroke:#6a4c93,color:#ffffff
-    classDef level2 fill:#7b1fa2,stroke:#7b1fa2,color:#ffffff
+    classDef level1 fill:#2d2d2d,stroke:#444444,color:#ffffff
+    classDef level2 fill:#3a3a3a,stroke:#555555,color:#ffffff
 
     class A level1
     class B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF level2
