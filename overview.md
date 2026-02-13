@@ -656,6 +656,17 @@ flowchart LR
     *   Red-Green Deployment.
     *   Rolling Deployment.
 
+## Final Learning Outcomes
+-   Requirements for success:
+    -   Decide to take the journey.
+    -   Internalize everything.
+    -   Follow along with all projects.
+-   **Resulting Capabilities**:
+    -   Safely call yourself a **Backend Engineer**.
+    -   Build **real systems**.
+    -   Build systems that **scale** (from zero users to a million users).
+    -   Build systems that are **maintainable** over a long period of time.
+
 ## Complete Overview Roadmap
 
 ```mermaid
