@@ -23,6 +23,17 @@ keywords:
 
 ![alt text](image-1.webp)
 
+<div style="position:relative;width:100%;padding-bottom:56.25%;height:0;">
+  <iframe
+    src="https://www.youtube.com/embed/C7F2VoJrqzU?si=1dH85TjXPB6uxSlD"
+    title="YouTube video player"
+    style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+  </iframe>
+</div>
+
 ## Introduction to Backend Engineering
 *   **Definition**: Backend engineering extends beyond building CRUD APIs. It involves building codebases and systems that are:
     *   **Reliable**
