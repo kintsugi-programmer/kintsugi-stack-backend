@@ -39,6 +39,7 @@ What Is a Backend, How It works and Why Does It Matter?
 ## 1. Definition of a Backend
 
 ### 1.1. Traditional Definition
+
 A backend is a computer that listens for requests through an open port (accessible over the internet) to allow clients or frontends to connect, send data, or receive data.
 
 *   **Communication Protocols:** HTTP, WebSocket, gRPC.
@@ -70,11 +71,14 @@ flowchart LR
 This trace follows a request starting from a browser and reaching a backend server deployed on AWS.
 
 ### 2.1. Step 1: The Browser & Domain Name
+
 *   **Action:** A request is initiated by entering a domain name in the browser (e.g., `backend-demo.senus.doxyz`).
 *   **Initial Lookup:** The browser must resolve this domain name to an IP address to know where to connect.
 
 ### 2.2. Step 2: DNS Server (Domain Name System)
+
 The DNS server translates domain names into IP addresses. It contains specific record types:
+
 *   **A Records:** Used to point a domain or subdomain to a specific **IP Address**.
     *   *Example:* The subdomain `backend-demo` points to a specific Public IP address of an AWS EC2 instance.
 *   **CNAME Records:** Used to point a domain or subdomain to another **domain name**.
@@ -90,11 +94,14 @@ flowchart TB
 ```
 
 ### 2.3. Step 3: Cloud Infrastructure (AWS EC2)
+
 *   **Destination:** The IP address obtained from the A Record belongs to an **EC2 instance** (a virtual server) located in a specific AWS subnet.
 *   **Public IP:** The request travels through the internet to reach this specific Public IP address.
 
 ### 2.4. Step 4: The Firewall (AWS Security Groups)
+
 Before the request enters the actual computer (instance), it passes through a cloud-native firewall.
+
 *   **Function:** Filters traffic based on allowed ports.
 *   **AWS Security Groups:** define which ports are accessible over the internet.
 *   **Configuration in Demo:**
@@ -118,7 +125,9 @@ flowchart LR
 ```
 
 ### 2.5. Step 5: Reverse Proxy (Nginx)
+
 Once the request passes the firewall and enters the instance, it hits a **Reverse Proxy**.
+
 *   **Definition:** A server sitting in front of other servers to manage redirects, configurations, and SSL from a centralized place (rather than configuring every application server individually).
 *   **Tool Used:** **Nginx**.
 *   **SSL Management:** **Certbot** is used to assign SSL certificates automatically.
@@ -149,6 +158,7 @@ flowchart TD
 ```
 
 ### 2.6. Step 6: The Application Server (Node.js)
+
 *   **Final Destination:** Nginx forwards the request to **localhost:3001**.
 *   **Process Management:** **PM2** is used to manage the Node processes.
     *   *Example:* `pm2 list` shows processes for frontend and backend.
@@ -157,6 +167,7 @@ flowchart TD
     *   *Note:* Running `curl localhost:3001/users` inside the instance returns the same response as accessing the public domain from the browser.
 
 ### 2.7. Summary of the Flow
+
 1.  **Browser:** Initiates request.
 2.  **DNS:** Resolves domain to AWS Public IP.
 3.  **AWS Firewall:** Allows traffic on Port 443/80.
@@ -186,7 +197,9 @@ flowchart LR
 Why are backends necessary?
 
 ### 3.1. The Core Concept: Centralized Data
+
 If you strip down the responsibility of a backend to a single word, it is **Data**.
+
 *   The need to **fetch** data.
 *   The need to **receive** data.
 *   The need to **persist** (save) data.
@@ -210,7 +223,9 @@ flowchart TB
 ```
 
 ### 3.2. Example: The "Like" Button Flow
+
 Imagine a user liking a friend's post on Instagram:
+
 1.  **User Action:** User clicks the "Like" button.
 2.  **Request:** The app sends a request to the server.
 3.  **Identification:** The server parses the request to identify the user (ID/Name).
@@ -239,6 +254,7 @@ sequenceDiagram
 ```
 
 ### 3.3. Why this requires a Backend
+
 *   **Centralization:** The server must hold information about *all* users and *all* states.
 *   **Client Limitation:** A user's app/frontend only contains data relevant to that specific user (their profile, their feed). It does not possess the global state required to route notifications to other users.
 *   **State Management:** Interactions between different users require a centralized computer to mediate and persist these changes.
@@ -276,9 +292,24 @@ flowchart TB
 To understand why backend logic cannot live in the frontend, we must look at how the frontend works end-to-end.
 
 ### 4.1. Frontend Request Flow (Next.js Demo)
+
 1.  **Initial Fetch:** Browser requests the frontend domain (e.g., `frontend-demo`).
 2.  **DNS & Firewall:** Same flow as backend (Resolves IP -> Passes Firewall 80/443).
 3.  **Nginx:** Listens for frontend domain, redirects to frontend application port (e.g., `localhost:3000`).
+    *   *Example Code Logic:*
+        ```nginx
+        server_name frontend-demo.senus.doxyz;
+        location / {
+            proxy_pass http://localhost:3000;
+        }
+        ```
+    *   **Commands to explore configuration:**
+        *   `cd /etc/nginx/conf.d/` - Navigate to the nginx configuration directory where all server configurations are stored.
+        *   `batcat frontend.conf` - View the frontend nginx configuration file with syntax highlighting (displays the actual config).
+        *   `pm2 list` - List all running PM2 processes to see both frontend and backend servers.
+    
+    > **Note:** Backend runs at port 3001, Frontend runs at port 3000
+
 4.  **Server Response:** The Next.js server sends back:
     *   The main HTML file.
     *   CSS files (Styles).
@@ -287,6 +318,8 @@ To understand why backend logic cannot live in the frontend, we must look at how
 5.  **Browser Execution:**
     *   **Painting:** Browser fetches CSS and paints the UI (backgrounds, fonts, buttons).
     *   **Hydration:** Browser fetches JavaScript and "hydrates" the page, adding event listeners to buttons and interactions.
+
+> Here Browser is Runtime !!!
 
 ```mermaid
 %%{init: {"theme": "dark", "themeVariables": {"primaryColor": "#2d2d2d", "primaryTextColor": "#e6edf3", "primaryBorderColor": "#444444", "lineColor": "#9aa0a6", "secondaryColor": "#3a3a3a", "tertiaryColor": "#2d2d2d"}}}%%
@@ -303,6 +336,7 @@ flowchart LR
 ```
 
 ### 4.2. Key Difference: Execution Environment
+
 *   **Backend:** The server receives a request, **processes the logic on the server**, and sends back the *result*.
 *   **Frontend:** The server sends the *code* (HTML/JS/CSS) to the client. **The browser (client's machine) runs the code.**
 
@@ -353,6 +387,7 @@ flowchart TD
 ```
 
 ### 5.1. Security and Sandboxing
+
 *   **Sandboxed Environment:** Browsers isolate the execution environment. Code cannot access the user's operating system, processes, or file system.
 *   **Limited Access:** Frontend code can only access specific browser APIs (DOM, Local Storage, Cookies).
 *   **The Problem:**
@@ -381,6 +416,7 @@ flowchart TB
 ```
 
 ### 5.2. CORS (Cross-Origin Resource Sharing)
+
 *   **Definition:** A browser security policy that restricts JavaScript from calling external APIs that reside on a different domain than the current page.
 *   **Restriction:** You can only fetch resources from the same domain unless the external API explicitly allows it via HTTP headers.
 *   **The Problem:** Backend servers often need to fetch data from multiple third-party sources. If those sources do not have specific CORS headers configured for your client, the browser will block the request. A backend server does not have this restriction.
@@ -405,6 +441,7 @@ flowchart TB
 ```
 
 ### 5.3. Database Connections
+
 *   **Drivers:** Backend servers use native database drivers (e.g., `pg` for Postgres, MongoDB drivers).
     *   These are designed to handle **socket connections** and **binary data**.
     *   They maintain **persistent connections**.
@@ -446,6 +483,7 @@ flowchart TB
 ```
 
 ### 5.4. Computing Power
+
 *   **Variability:** Frontend applications run on user devices (smartphones, old laptops, desktops).
     *   Hardware specs vary wildly (e.g., 256MB RAM, single-core processors).
 *   **The Problem:**
